@@ -1,7 +1,6 @@
 package br.edu.ifsp.biblioteca.repository;
 
 import br.edu.ifsp.biblioteca.domain.Livro;
-import com.sun.org.apache.bcel.internal.generic.LOOKUPSWITCH;
 
 import java.util.*;
 
@@ -37,7 +36,7 @@ public class LivroRepositoryEmMemoria implements ILivroRepository{
     //outra forma
 //        List<Livro> colecaoLivros = new ArrayList<>(this.livros.values());
 //        return colecaoLivros;
-        //return new ArrayList<>(this.livros.values());
+        return new ArrayList<>(this.livros.values());
     }
 
     @Override

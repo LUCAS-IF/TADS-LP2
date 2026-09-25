@@ -28,4 +28,5 @@ public class Autor {
     public String toString(){ // implementada para formatar o tipo de mensagem que será mostrada, CASO NAO TENHA A FUNÇÃO TOsTRING ELE GERA UYM HASH CODE QUE IDENTIFICA O OBJETO. POIS TODA CLASSE HERDA DA CLASSE OBJECT QUE POSSUI A FUNCAO toString POR ISSO USAMOS O OVERRIDE, PARA SOBRESCREVER A FUNCAO DA MANEIRA QUE QUEREMOS
         return this.nome;
     }
+
 }

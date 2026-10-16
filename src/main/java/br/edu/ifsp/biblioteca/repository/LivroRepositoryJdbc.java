@@ -30,14 +30,23 @@ public class LivroRepositoryJdbc implements ILivroRepository {
         {
             conexao.setAutoCommit(false);
 
-            if (livro.getId() == null) { // precisa cadastrar
-                this.inserirLivro(conexao, livro);
-            } else { // precisa atualizar
-                this.atualizarLivro(conexao, livro);
-            }
+            try {
 
-            this.salvarAutores(conexao, livro);
-            this.salvarExemplares(conexao, livro);
+                if (livro.getId() == null) { // precisa cadastrar
+                    this.inserirLivro(conexao, livro);
+                } else { // precisa atualizar
+                    this.atualizarLivro(conexao, livro);
+                }
+
+                this.salvarAutores(conexao, livro);
+                this.salvarExemplares(conexao, livro);
+
+                conexao.commit();
+
+            } catch (SQLException erro) {
+                conexao.rollback();
+                throw erro;
+            }
 
         } catch (SQLException erro) {
             throw new IllegalStateException("Falha ao salvar o livro", erro);
@@ -165,7 +174,7 @@ public class LivroRepositoryJdbc implements ILivroRepository {
 
     private void carregarAutores(Connection conexao, Livro livro) throws SQLException {
         String sql = "SELECT a.* FROM autor a "
-                + "JOIN livro_autor la ON la.autor_id = a.id"
+                + "JOIN livro_autor la ON la.autor_id = a.id "
                 + "WHERE la.livro_id = ?";
 
         try (PreparedStatement comando = conexao.prepareStatement(sql)) {

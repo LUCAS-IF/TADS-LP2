@@ -23,24 +23,26 @@ public class Livro {
     private Integer anoPublicacao;
 
     @OneToMany(
-            mappedBy = "livro",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.LAZY
+        mappedBy = "livro",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true,
+        fetch = FetchType.LAZY
     )
     private List<Exemplar> listaDeExemplares = new ArrayList<>();
 
+    // ORM = Object Relational Mapping
+
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
-            name = "livro_autor",
-            joinColumns = @JoinColumn(name = "livro_id"),
-            inverseJoinColumns = @JoinColumn(name = "autor_id")
+        name = "livro_autor",
+        joinColumns = @JoinColumn(name = "livro_id"),
+        inverseJoinColumns = @JoinColumn(name = "autor_id")
     )
-    private List <Autor> autores = new ArrayList<>();
+    private List<Autor> autores = new ArrayList<>();
 
     public Livro() {}
 
-    public Livro(String isbn, String titulo, Integer anoPublicacao){
+    public Livro(String isbn, String titulo, Integer anoPublicacao) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.anoPublicacao = anoPublicacao;
@@ -56,27 +58,27 @@ public class Livro {
         this.id = id;
     }
 
-    public String getIsbn(){
-        return this.isbn;
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setIsbn(String isbn){
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
-    public String getTitulo(){
-        return this.titulo;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setTitulo(String titulo){
+    public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
-    public Integer getAnoPublicacao(){
-        return this.anoPublicacao;
+    public Integer getAnoPublicacao() {
+        return anoPublicacao;
     }
 
-    public void setAnoPublicacao(Integer anoPublicacao){
+    public void setAnoPublicacao(Integer anoPublicacao) {
         this.anoPublicacao = anoPublicacao;
     }
 
@@ -106,5 +108,3 @@ public class Livro {
                 '}';
     }
 }
-
-

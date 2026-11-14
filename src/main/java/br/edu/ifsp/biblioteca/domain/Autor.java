@@ -1,10 +1,21 @@
 package br.edu.ifsp.biblioteca.domain;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "autor")
 public class Autor {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, length = 150)
     private String nome;
 
-    public Autor(String nome){
+    protected Autor() {}
+
+    public Autor(String nome) {
         this.nome = nome;
     }
 
@@ -12,21 +23,20 @@ public class Autor {
         return this.id;
     }
 
-    public void setId(Long id){
+    public void setId(Long id) {
         this.id = id;
     }
 
     public String getNome() {
-        return this.nome;
+        return nome;
     }
 
-    public void setNome(String nome){
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
     @Override
-    public String toString(){ // implementada para formatar o tipo de mensagem que será mostrada, CASO NAO TENHA A FUNÇÃO TOsTRING ELE GERA UYM HASH CODE QUE IDENTIFICA O OBJETO. POIS TODA CLASSE HERDA DA CLASSE OBJECT QUE POSSUI A FUNCAO toString POR ISSO USAMOS O OVERRIDE, PARA SOBRESCREVER A FUNCAO DA MANEIRA QUE QUEREMOS
+    public String toString() {
         return this.nome;
     }
-
 }
